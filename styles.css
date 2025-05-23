@@ -1,0 +1,566 @@
+/* Reset and Base Styles */
+* {
+                 margin: 0;
+                 padding: 0;
+                 box-sizing: border-box;
+             }
+             
+             :root {
+                 --primary-color: #d23669;
+                 --secondary-color: #ff9a9e;
+                 --dark-color: #1a1a2e;
+                 --light-color: #fef6f6;
+                 --text-color: #333;
+                 --text-light: #777;
+                 --font-main: 'Montserrat', sans-serif;
+                 --font-special: 'Dancing Script', cursive;
+             }
+             
+             body {
+                 font-family: var(--font-main);
+                 overflow-x: hidden;
+                 background-color: var(--light-color);
+                 color: var(--text-color);
+                 transition: background-color 1s ease;
+                 line-height: 1.6;
+             }
+             
+             /* Loader Styles */
+             .loader-container {
+                 position: fixed;
+                 top: 0;
+                 left: 0;
+                 width: 100%;
+                 height: 100%;
+                 background: linear-gradient(135deg, var(--secondary-color) 0%, #fad0c4 100%);
+                 display: flex;
+                 flex-direction: column;
+                 justify-content: center;
+                 align-items: center;
+                 z-index: 1000;
+                 transition: opacity 1s, visibility 1s;
+             }
+             
+             .loader-container.hidden {
+                 opacity: 0;
+                 visibility: hidden;
+             }
+             
+             .loader {
+                 width: 80px;
+                 height: 80px;
+                 border: 8px solid rgba(255, 255, 255, 0.3);
+                 border-radius: 50%;
+                 border-top-color: #fff;
+                 animation: spin 1s ease-in-out infinite;
+                 margin-bottom: 20px;
+             }
+             
+             .loader-text {
+                 color: white;
+                 font-size: 1.25rem;
+                 font-weight: 600;
+                 text-align: center;
+             }
+             
+             @keyframes spin {
+                 to { transform: rotate(360deg); }
+             }
+             
+             /* Main Content */
+             .main-content {
+                 display: none;
+                 opacity: 0;
+                 transition: opacity 1s ease;
+                 padding: 2rem;
+                 max-width: 1200px;
+                 margin: 0 auto;
+                 position: relative;
+                 min-height: 100vh;
+             }
+             
+             .main-content.visible {
+                 display: block;
+                 opacity: 1;
+             }
+             
+             /* Header Section */
+             .header {
+                 text-align: center;
+                 margin-bottom: 3rem;
+                 position: relative;
+                 padding-top: 2rem;
+             }
+             
+             .image-container {
+                 width: 220px;
+                 height: 220px;
+                 margin: 0 auto 1.5rem;
+                 border-radius: 50%;
+                 position: relative;
+                 overflow: hidden;
+                 box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+                 border: 8px solid rgba(255, 255, 255, 0.8);
+             }
+             
+             .sister-image {
+                 width: 100%;
+                 height: 100%;
+                 object-fit: cover;
+                 transition: transform 0.5s ease;
+             }
+             
+             .text-overlay {
+                 position: relative;
+                 margin: 1.5rem 0;
+             }
+             
+             .birthday-message {
+                 font-family: var(--font-special);
+                 font-size: 3rem;
+                 color: var(--primary-color);
+                 margin: 0.5rem 0;
+                 text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+                 opacity: 0;
+                 transform: translateY(20px);
+                 animation: fadeInUp 1s ease forwards 0.5s;
+             }
+             
+             .birthday-message span {
+                 display: inline-block;
+                 position: relative;
+             }
+             
+             .birthday-message span::after {
+                 content: '';
+                 position: absolute;
+                 bottom: 5px;
+                 left: 0;
+                 width: 100%;
+                 height: 12px;
+                 background-color: rgba(210, 54, 105, 0.2);
+                 z-index: -1;
+                 transform: scaleX(0);
+                 transform-origin: left;
+                 animation: underline 1s ease forwards 1.5s;
+             }
+             
+             .sub-message {
+                 font-size: 1.25rem;
+                 color: var(--text-light);
+                 font-weight: 300;
+                 opacity: 0;
+                 transform: translateY(20px);
+                 animation: fadeInUp 1s ease forwards 1s;
+             }
+             
+             /* Countdown Styles */
+.countdown-container {
+    text-align: center;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease forwards 1.5s;
+}
+
+.countdown-container h2 {
+    font-family: var(--font-special);
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    background: white;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    min-width: 100px;
+}
+
+.countdown-item span:first-child {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.countdown-item span:last-child {
+    font-size: 1rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Birthday Animation */
+.birthday-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(210, 54, 105, 0.95);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+}
+
+.birthday-animation.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.animation-content {
+    text-align: center;
+    color: white;
+    padding: 2rem;
+    animation: pulse 2s infinite;
+}
+
+.animation-content h2 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.animation-content p {
+    font-size: 3rem;
+    font-family: var(--font-special);
+    margin-bottom: 2rem;
+}
+
+.animation-graphic {
+    font-size: 5rem;
+    animation: bounce 1s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .countdown {
+        gap: 1rem;
+    }
+    
+    .countdown-item {
+        min-width: 80px;
+        padding: 0.8rem 1rem;
+    }
+    
+    .countdown-item span:first-child {
+        font-size: 2rem;
+    }
+    
+    .animation-content h2 {
+        font-size: 2.5rem;
+    }
+    
+    .animation-content p {
+        font-size: 2rem;
+    }
+    
+    .animation-graphic {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .countdown {
+        gap: 0.5rem;
+    }
+    
+    .countdown-item {
+        min-width: 70px;
+        padding: 0.5rem;
+    }
+    
+    .countdown-item span:first-child {
+        font-size: 1.5rem;
+    }
+    
+    .animation-content h2 {
+        font-size: 2rem;
+    }
+    
+    .animation-content p {
+        font-size: 1.5rem;
+    }
+}
+             /* Surprise Elements */
+             .surprise-container {
+                 display: grid;
+                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                 gap: 2rem;
+                 margin: 3rem 0;
+             }
+             
+             .surprise-box {
+                 background-color: #fff;
+                 border-radius: 12px;
+                 box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+                 cursor: pointer;
+                 transition: all 0.4s ease;
+                 position: relative;
+                 overflow: hidden;
+                 aspect-ratio: 1/1;
+                 opacity: 0;
+                 transform: translateY(20px);
+                 animation: appear 0.5s ease forwards;
+             }
+             
+             .surprise-box:hover {
+                 transform: translateY(-8px);
+                 box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+             }
+             
+             .surprise-box.revealed {
+                 aspect-ratio: auto;
+                 height: auto;
+             }
+             
+             .surprise-content {
+                 display: none;
+                 height: 100%;
+                 flex-direction: column;
+             }
+             
+             .surprise-box.revealed .surprise-content {
+                 display: flex;
+             }
+             
+             .surprise-box.revealed .surprise-icon {
+                 display: none;
+             }
+             
+             .surprise-icon {
+                 position: absolute;
+                 top: 50%;
+                 left: 50%;
+                 transform: translate(-50%, -50%);
+                 font-size: 3.5rem;
+                 color: var(--primary-color);
+                 opacity: 0.9;
+                 transition: all 0.3s ease;
+             }
+             
+             .image-wrapper {
+                 flex: 1;
+                 overflow: hidden;
+                 display: flex;
+                 align-items: center;
+                 justify-content: center;
+             }
+             
+             .surprise-content img {
+                 width: 100%;
+                 height: 100%;
+                 object-fit: cover;
+                 transition: transform 0.5s ease;
+             }
+             
+             .surprise-box:hover .surprise-content img {
+                 transform: scale(1.05);
+             }
+             
+             .surprise-content p {
+                 padding: 1.5rem;
+                 font-size: 1rem;
+                 color: var(--text-color);
+                 text-align: center;
+                 background: white;
+             }
+             
+             /* Final Message */
+             .final-message {
+                 background-color: var(--dark-color);
+                 color: white;
+                 padding: 3rem;
+                 border-radius: 12px;
+                 text-align: center;
+                 margin: 3rem auto;
+                 max-width: 800px;
+                 display: none;
+                 position: relative;
+                 overflow: hidden;
+                 box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+                 opacity: 0;
+                 transform: translateY(20px);
+                 transition: all 1s ease;
+             }
+             
+             .final-message.visible {
+                 opacity: 1;
+                 transform: translateY(0);
+             }
+             
+             .final-message h2 {
+                 font-family: var(--font-special);
+                 font-size: 2.5rem;
+                 margin-bottom: 1.5rem;
+                 color: var(--secondary-color);
+             }
+             
+             .final-message p {
+                 font-size: 1.1rem;
+                 line-height: 1.8;
+                 margin-bottom: 1.5rem;
+                 opacity: 0.9;
+             }
+             
+             .final-message p:last-child {
+                 margin-bottom: 0;
+                 font-weight: 600;
+                 color: var(--secondary-color);
+             }
+             
+             /* Animations */
+             @keyframes fadeInUp {
+                 from { opacity: 0; transform: translateY(20px); }
+                 to { opacity: 1; transform: translateY(0); }
+             }
+             
+             @keyframes appear {
+                 to { opacity: 1; transform: translateY(0); }
+             }
+             
+             @keyframes underline {
+                 from { transform: scaleX(0); }
+                 to { transform: scaleX(1); }
+             }
+             
+             /* Flower Animations */
+             .flower {
+                 position: absolute;
+                 font-size: 1.5rem;
+                 opacity: 0.7;
+                 z-index: -1;
+                 animation: float 10s infinite linear;
+                 pointer-events: none;
+             }
+             
+             @keyframes float {
+                 0% { transform: translateY(0) rotate(0deg); }
+                 50% { transform: translateY(-20px) rotate(180deg); }
+                 100% { transform: translateY(0) rotate(360deg); }
+             }
+             
+             /* Cake Animation */
+             .cake {
+                 position: absolute;
+                 font-size: 2rem;
+                 z-index: -1;
+                 animation: bounce 3s infinite ease-in-out;
+                 pointer-events: none;
+             }
+             
+             @keyframes bounce {
+                 0%, 100% { transform: translateY(0); }
+                 50% { transform: translateY(-15px); }
+             }
+             
+             /* Confetti */
+             .confetti {
+                 position: absolute;
+                 width: 10px;
+                 height: 10px;
+                 background-color: var(--secondary-color);
+                 opacity: 0;
+                 pointer-events: none;
+             }
+             
+             /* Responsive Design */
+             @media (max-width: 992px) {
+                 .birthday-message {
+                     font-size: 2.5rem;
+                 }
+                 
+                 .image-container {
+                     width: 200px;
+                     height: 200px;
+                 }
+                 
+                 .timer {
+                     font-size: 1.5rem;
+                 }
+             }
+             
+             @media (max-width: 768px) {
+                 .main-content {
+                     padding: 1.5rem;
+                 }
+                 
+                 .birthday-message {
+                     font-size: 2.2rem;
+                 }
+                 
+                 .image-container {
+                     width: 180px;
+                     height: 180px;
+                 }
+                 
+                 .surprise-container {
+                     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                 }
+                 
+                 .final-message {
+                     padding: 2rem;
+                 }
+                 
+                 .final-message h2 {
+                     font-size: 2rem;
+                 }
+             }
+             
+             @media (max-width: 576px) {
+                 .birthday-message {
+                     font-size: 1.8rem;
+                 }
+                 
+                 .image-container {
+                     width: 160px;
+                     height: 160px;
+                 }
+                 
+                 .surprise-container {
+                     grid-template-columns: 1fr;
+                 }
+                 
+                 .timer {
+                     font-size: 1.3rem;
+                     gap: 0.5rem;
+                 }
+                 
+                 .final-message {
+                     padding: 1.5rem;
+                 }
+                 
+                 .final-message h2 {
+                     font-size: 1.8rem;
+                 }
+                 
+                 .final-message p {
+                     font-size: 1rem;
+                 }
+             }
